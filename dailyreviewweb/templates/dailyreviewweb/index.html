@@ -22,5 +22,11 @@
     <title>Daily Review</title>
   </head>
 
-  <body></body>
+  <body>
+    <ul>
+      {% for prompt in all_prompts %}
+      <li>{{ prompt.text }}</li>
+      {% endfor %}
+    </ul>
+  </body>
 </html>

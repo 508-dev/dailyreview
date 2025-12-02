@@ -2,13 +2,16 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
 from .models import Prompt
+from django.views import generic
 
 
-def index(request):
-    random_prompt = Prompt.objects.order_by("?").first()
-    template = loader.get_template("polls/index.html")
-    context = {"random_prompt": random_prompt}
-    return HttpResponse(template.render(context, request))
+
+class IndexView(generic.ListView):
+    template_name = "dailyreviewweb/index.html"
+
+    def get_queryset(self):
+        """Return all prompts"""
+        return Prompt.objects.all()
 
 
 def results(request, prompt_id):
